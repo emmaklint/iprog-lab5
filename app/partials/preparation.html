@@ -1,0 +1,34 @@
+<div class="container-fluid" id="mainContainer">
+	<div class="row">
+		<p ng-if="!loading">{{status}}</p>
+
+	<div class="row">
+		<div class="col-md-4">
+			<p>My dinner: {{getNumberOfGuests()}} people</p>
+		</div>
+		<div class="col-md-4">
+			<a href="#/search" class="btn btn-primary">Go back and edit dinner!</a>
+		</div>
+	</div>
+
+
+	<div class="row" ng-if="loading" class=dishDiv>
+		<div ng-repeat="dish in menu" class="dishDiv">
+			<div class="row dishDiv">
+				<div class="dishDiv">
+					<div class="col-md-2">
+						<img ng-src="{{dish.ImageURL}}" class="img-rounded" width="200" height="200"/>
+					</div>
+					<div class="col-md-4">
+						<div>
+							{{dish.Title}}
+						</div>
+						<div>
+							{{dish.Description}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

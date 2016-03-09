@@ -1,5 +1,40 @@
-<!-- We include the sidebar as it is shared across two screens. -->
-<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+<div class="container-fluid" id="mainContainer">
+	<div class="row" id="mainRow">
+		<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
-<!-- TODO in Lab 5: Display the dish information including image, Description, 
-Instructions, Ingredients and total cost. -->
+		<div class="col-xs-9">
+			<p ng-if="!loading">{{status}}</p>
+
+			<div class="row" ng-if="loading">
+
+				<div class="col-xs-6">
+					<div id="dishFrame">
+						<h3>{{dish.Title}}</h3>
+						<img ng-src="{{dish.ImageURL}}" class="img-responsive" alt="{{dish.Title}}">
+						<p>{{dish.Description}}</p>
+					</div>
+					<a href="#/search" class="btn btn-primary">Back to Select Dish</a>
+				</div>
+
+				<div class="col-xs-6">
+					<h3>Ingredients for {{getNumberOfGuests()}} people</h3>
+					<table width="100%">
+						<tr ng-repeat="ingredient in dish.Ingredients">
+							<td width="30%">{{(ingredient.Quantity * getNumberOfGuests())}} {{ingredient.Unit}}</td>
+							<td width="50%">{{ingredient.Name}}</td>
+							<td width="20%">{{(ingredient.Quantity * getNumberOfGuests())}} kr</td>
+						</tr>
+					</table>
+					<table width="100%">
+						<tr>
+							<td width="80%">
+								<a class="btn btn-primary" ng-click="confirmDish(dish)" href="#/search">Confirm Dish</a>
+							</td>
+							<td width="20%"><h4>{{getDishPrice()}} kr</h4></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
